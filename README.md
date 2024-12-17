@@ -1,7 +1,7 @@
 ﻿# zenify_backend
 
 # Create Virtual Environment if Absent
-python -m venv venv
+python -m venv zenify_back
 
 # Activate Script
 venv\Scripts\activate
