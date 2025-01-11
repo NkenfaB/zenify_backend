@@ -5,7 +5,7 @@ from flask import Blueprint, jsonify
 from dotenv import load_dotenv
 import azure.cognitiveservices.speech as speechsdk
 
-speech_controller = Blueprint('speech_controller', __name__)
+speech_route = Blueprint('speech_route', __name__)
 
 load_dotenv()
 speech_key = os.getenv('AZURE_SPEECH_KEY')
@@ -20,7 +20,7 @@ def setup_speech_recognition():
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
     return speech_recognizer
 
-@speech_controller.route('/speech/recognize', methods=['GET'])
+@speech_route.route('/speech/recognize', methods=['GET'])
 def recognize_speech():
     """
     Example endpoint to trigger speech recognition.

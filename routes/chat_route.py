@@ -11,9 +11,9 @@ gemini_model = os.getenv('GEMINI_MODEL')
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel(gemini_model)
 
-chat_controller = Blueprint('chat_controller', __name__)
+chat_route = Blueprint('chat_controller', __name__)
 
-@chat_controller.route('/chat', methods=['POST'])
+@chat_route.route('/chat', methods=['POST'])
 def chat_with_bot():
     """
     Example endpoint to handle user messages to the mental health chatbot.
