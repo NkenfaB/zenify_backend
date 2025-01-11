@@ -1,6 +1,3 @@
-<<<<<<< HEAD
--- Create All Queries Here
-=======
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
@@ -21,4 +18,3 @@ def create_app():
         db.create_all()
 
     return app
->>>>>>> 3bf8d4379be741eb9b4491881b2e4aeaf605400c
