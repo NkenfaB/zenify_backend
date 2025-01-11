@@ -11,7 +11,7 @@ load_dotenv()
 
 app = create_app()
 
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, supports_credentials=True)
 
 # Handle preflight requests (OPTIONS)
 @app.before_request
