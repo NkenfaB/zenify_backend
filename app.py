@@ -3,10 +3,12 @@
 import os
 from flask import Flask
 from config import Config
+from db.db import create_app, db
 
 # Import your controllers
 from controller.chat_controller import chat_controller
 from controller.speech_controller import speech_controller
+from routes.auth_routes import auth_routes
 
 
 def create_app():
@@ -16,6 +18,8 @@ def create_app():
     # Register Blueprints
     app.register_blueprint(chat_controller, url_prefix='/api')
     app.register_blueprint(speech_controller, url_prefix='/api')
+    app.register_blueprint(auth_routes, url_prefix='/api/auth')
+
     
 
     return app
