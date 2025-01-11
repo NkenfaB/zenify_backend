@@ -11,7 +11,13 @@ load_dotenv()
 
 app = create_app()
 
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://blue-dune-091d25a0f.4.azurestaticapps.net"}})
+
+# Handle preflight requests (OPTIONS)
+@app.before_request
+def handle_options_request():
+    if request.method == 'OPTIONS':
+        return '', 200
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 #app.register_blueprint(chat_controller, url_prefix='/api')
