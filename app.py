@@ -11,7 +11,7 @@ load_dotenv()
 
 app = create_app()
 
-CORS(app, resources={r"/*": {"origins": "https://blue-dune-091d25a0f.4.azurestaticapps.net"}})
+CORS(app, resources={r"/api/*": {"origins": "https://blue-dune-091d25a0f.4.azurestaticapps.net"}})
 
 # Handle preflight requests (OPTIONS)
 @app.before_request
