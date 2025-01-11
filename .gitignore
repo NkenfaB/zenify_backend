@@ -1,5 +1,7 @@
 zenify_back/
 
+.env
+
 *.pyc
 __pycache__/
 
@@ -15,3 +17,4 @@ build/
 
 migrations/
 venv/
+

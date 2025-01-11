@@ -1,16 +1,58 @@
+# from flask import Blueprint, request, jsonify
+# from models.database import User
+# from db.db import db
+# from utils.token_utils import generate_token
+
+# auth_routes = Blueprint('auth', __name__)
+
+# @auth_routes.route('/signup', methods=['POST'])
+# def signup():
+#     data = request.json
+#     username = data.get('username')
+#     email = data.get('email')
+#     password = data.get('password')
+
+#     if User.query.filter_by(email=email).first():
+#         return jsonify({'error': 'Email already registered'}), 400
+
+#     user = User(username=username, email=email)
+#     user.set_password(password)
+#     db.session.add(user)
+#     db.session.commit()
+
+#     return jsonify({'message': 'User registered successfully'}), 201
+
+# @auth_routes.route('/login', methods=['POST'])
+# def login():
+#     data = request.json
+#     email = data.get('email')
+#     password = data.get('password')
+
+#     user = User.query.filter_by(email=email).first()
+#     if user and user.check_password(password):
+#         token = generate_token({'id': user.id, 'email': user.email})
+#         return jsonify({'token': token}), 200
+#     else:
+#         return jsonify({'error': 'Invalid credentials'}), 401
+
+
 from flask import Blueprint, request, jsonify
-from models import User, db
-from utils import generate_token, verify_token
+from models.user import User
+from db.db import db
+from utils.token_utils import generate_token
 
 auth_routes = Blueprint('auth', __name__)
 
-# Sign Up Route
+# ✅ Signup Route
 @auth_routes.route('/signup', methods=['POST'])
 def signup():
     data = request.json
     username = data.get('username')
     email = data.get('email')
     password = data.get('password')
+
+    if not username or not email or not password:
+        return jsonify({'error': 'Missing required fields'}), 400
 
     if User.query.filter_by(email=email).first():
         return jsonify({'error': 'Email already registered'}), 400
@@ -22,7 +64,7 @@ def signup():
 
     return jsonify({'message': 'User registered successfully'}), 201
 
-# Log In Route
+# ✅ Login Route
 @auth_routes.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -35,17 +77,3 @@ def login():
         return jsonify({'token': token}), 200
     else:
         return jsonify({'error': 'Invalid credentials'}), 401
-
-# Forgot Password Route
-@auth_routes.route('/forgot-password', methods=['POST'])
-def forgot_password():
-    data = request.json
-    email = data.get('email')
-
-    user = User.query.filter_by(email=email).first()
-    if user:
-        token = generate_token({'id': user.id, 'email': user.email})
-        # In a real app, send this token via email
-        return jsonify({'reset_token': token}), 200
-    else:
-        return jsonify({'error': 'Email not found'}), 404
