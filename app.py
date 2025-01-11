@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from db.db import create_app
 from routes.auth_routes import auth_routes
 from dotenv import load_dotenv
@@ -9,6 +10,9 @@ import os
 load_dotenv()
 
 app = create_app()
+
+CORS(app)
+
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 #app.register_blueprint(chat_controller, url_prefix='/api')
 #app.register_blueprint(speech_controller, url_prefix='/api')
