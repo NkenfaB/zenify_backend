@@ -1,0 +1,6 @@
+Dockerfile
+.dockerignore
+.gitignore
+.env
+README.md
+zenify_back
