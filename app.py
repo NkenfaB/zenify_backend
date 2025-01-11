@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from db.db import create_app
 from routes.auth_routes import auth_routes
